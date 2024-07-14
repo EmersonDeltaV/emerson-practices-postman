@@ -1,0 +1,6 @@
+@Emerson.Practices.Postman.PeopleDirectoryApp_HostAddress = http://localhost:5258
+
+GET {{Emerson.Practices.Postman.PeopleDirectoryApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
