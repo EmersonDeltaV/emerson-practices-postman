@@ -52,10 +52,12 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 var people = new List<Person>();
+var employmentHistory = new List<EmploymentHistory>();
 
 //Add the Apis
 app.AddAuthenticationApi();
 app.AddPeopleApi(people);
+app.AddEmploymentHistoryApi(people, employmentHistory);
 
 app.Run();
 
