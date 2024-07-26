@@ -188,10 +188,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://peopledirectory-pmsc-test.azurewebsites.net/people/e42dd9fd-e333-4104-bf81-c3b378b49ab4",
+					"raw": "https://peopledirectory-pmsc.azurewebsites.net/people/e42dd9fd-e333-4104-bf81-c3b378b49ab4",
 					"protocol": "https",
 					"host": [
-						"peopledirectory-pmsc-test",
+						"peopledirectory-pmsc",
 						"azurewebsites",
 						"net"
 					],
@@ -231,10 +231,10 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://peopledirectory-pmsc-test.azurewebsites.net/people/e42dd9fd-e333-4104-bf81-c3b378b49ab4",
+					"raw": "https://peopledirectory-pmsc.azurewebsites.net/people/e42dd9fd-e333-4104-bf81-c3b378b49ab4",
 					"protocol": "https",
 					"host": [
-						"peopledirectory-pmsc-test",
+						"peopledirectory-pmsc",
 						"azurewebsites",
 						"net"
 					],
