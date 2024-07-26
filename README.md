@@ -27,10 +27,10 @@ This project explains a better way to utilize Postman in developing and testing 
 
 # Notable Postman Features
 
-1. **Environments**, each environments contains a specific variable dedicated to the defined environment such as:
+1. **Environments**, each environments contains a specific variable dedicated to the defined environment, such as:
    1. baseUrl
-   2. Username
-   3. Password
+   2. username
+   3. password
 2. **Login**
    1. The request Body contains the variable `{{username}}` and `{{password}}`.
    2. The Post-Response script contains 2 notable content.
