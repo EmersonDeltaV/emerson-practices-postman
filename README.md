@@ -1,1 +1,42 @@
-# emerson-practices-postman
+# Introduction
+
+This project explains a better way to utilize Postman in developing and testing API Projects. 
+
+# Content
+
+## Source Codes
+`src/Emerson.Practices.Postman.PeopleDirectoryApp` - Developed using ASP.Net 8.0, the source code of the sample Rest API that the postman collection is created for.
+
+## Postman Workspaces
+`postman\Ideal` - The ideal way of using Postman, utilizing environment, random variables, pre-request scripts, post-response scripts.
+`postman\BadExample` - An unoptimized example of using Postman, No environment, variables, pre-scripts or post-scripts is used, all plain-old-collection of hardcoded requests.
+
+# How To Run
+
+1. Clone the repo.
+2. Run the `src/Emerson.Practices.Postman.PeopleDirectoryApp/Emerson.Practices.Postman.PeopleDirectoryApp.sln`
+3. Wait until the swagger is loaded.
+4. Open your Postman and Create a new Workspace `Postman Ideal`
+5. Load the newly created Workspace `Postman Ideal`.
+6. Import all the collection and environments from this folder `postman\Ideal`.
+7. Navigate to the `Collections\Main`.
+8. Select the environment `Local`.
+9. Run the requests 1-by-1 from `Authorization` to `Cleanup` folder.
+10. You may also want to create a new Workspace and import the collections from the `postman\BadExample` folder.
+
+# Notable Postman Features
+
+1. **Environments**, each environments contains a specific variable dedicated to the defined environment such as:
+   1. baseUrl
+   2. Username
+   3. Password
+2. **Login**
+   1. The request Body contains the variable `{{username}}` and `{{password}}`.
+   2. The Post-Response script contains 2 notable content.
+      1.  The test itself confirming that the response should return 200 status code.
+      2.  The setter of environment `token` based on the response of the request.
+3.  **All Requests**, all requests other than Login uses the `{{token}}` variable as thier `Authorization`.
+4. **Add Person**
+   1. The Pre-Request script generate new variable called `newDateOfBirth` to generate a date from 5~30 years ago.
+   2. The request Body uses the random generator variables `{{$randomFirstName}}`, `{{$randomLastName}}`, and `{{$randomExampleEmail}}` to generate a more realistic payload based on the needed property.
+   3. The Post-Request script stores the variable `{{personId}}` for succeeding API requests.
