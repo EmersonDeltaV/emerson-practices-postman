@@ -1,0 +1,1232 @@
+{
+	"info": {
+		"_postman_id": "b92d9691-b208-4321-aee4-f25d0735db63",
+		"name": "Main",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32379480"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Login should return status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.environment.set('token', pm.response.json().accessToken);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 16:23:20 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyMSIsIm5iZiI6MTcyMDg4NzgwMCwiZXhwIjoxNzIwOTc0MjAwLCJpYXQiOjE3MjA4ODc4MDAsImlzcyI6ImxvY2FsLWF1dGgiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MDE1In0.J20Gd_ltnOlY96YHfZM_U4kkd9yYxp2FR6DMNcxClYE\"\n}"
+						},
+						{
+							"name": "Invalid",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/login",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 16:25:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "\"Invalid username or password\""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "People",
+			"item": [
+				{
+					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get all should return status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"\r",
+									"\t\tlet data = pm.response.json();\r",
+									"\t\tif(data.count > 0){\r",
+									"\t\t\tpm.environment.set(\"personId\", data.data[0].id);\r",
+									"\t\t}\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/people",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/people",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 16:23:52 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"2127c332-6ed5-4148-9f60-34c187467edd\",\n        \"firstName\": \"Dulce\",\n        \"lastName\": \"Sawayn\",\n        \"emailAddress\": \"Dulce.Sawayn@gmail.com\",\n        \"birthDate\": \"2010-01-01T00:00:00\",\n        \"age\": 14\n    },\n    {\n        \"id\": \"52c61e28-e646-4918-b260-4957d05c37bd\",\n        \"firstName\": \"Danial\",\n        \"lastName\": \"Kessler\",\n        \"emailAddress\": \"Danial.Kessler@gmail.com\",\n        \"birthDate\": \"2010-01-01T00:00:00\",\n        \"age\": 14\n    },\n    {\n        \"id\": \"420450c1-cefc-4b7d-88b6-87b51c9eb996\",\n        \"firstName\": \"Immanuel\",\n        \"lastName\": \"Morissette\",\n        \"emailAddress\": \"Immanuel.Morissette@gmail.com\",\n        \"birthDate\": \"2010-01-01T00:00:00\",\n        \"age\": 14\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Add Person",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let data = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Add person should return status code 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"\r",
+									"\tpm.environment.set(\"personId\", data.id);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Add person should return person information\", function(){\r",
+									"    pm.expect(data.firstName).to.not.empty;\r",
+									"    pm.expect(data.lastName).to.not.empty;\r",
+									"    pm.expect(data.age).to.be.greaterThan(1);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const moment = require('moment')\r",
+									"const randomYearsAgo = (Math.floor(Math.random() * 26) + 5) * -1; // Random years between 5 and 30\r",
+									"let pastDate = moment(pm.variables.replaceIn('{{$randomDatePast}}')).add(randomYearsAgo, 'y');\r",
+									"\r",
+									"pm.environment.set('newDateOfBirth', pastDate.format(\"YYYY-MM-DD\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"{{$randomFirstName}}\",\r\n  \"lastName\": \"{{$randomLastName}}\",\r\n  \"emailAddress\": \"{{$randomExampleEmail}}\",\r\n  \"birthDate\": \"{{newDateOfBirth}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/people",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"{{newFirstName}}\",\r\n  \"lastName\": \"{{newLastName}}\",\r\n  \"emailAddress\": \"{{newFirstName}}.{{newLastName}}@gmail.com\",\r\n  \"birthDate\": \"2010-01-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/people",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 16:23:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Location",
+									"value": "/people/2127c332-6ed5-4148-9f60-34c187467edd"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"2127c332-6ed5-4148-9f60-34c187467edd\",\n    \"firstName\": \"Dulce\",\n    \"lastName\": \"Sawayn\",\n    \"emailAddress\": \"Dulce.Sawayn@gmail.com\",\n    \"birthDate\": \"2010-01-01T00:00:00\",\n    \"age\": 14\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Person",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get person should return status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"\r",
+									"    let data = pm.response.json();\r",
+									"    pm.environment.set(\"newFirstName\", data.firstName);\r",
+									"    pm.environment.set(\"newLastName\", data.lastName);\r",
+									"    pm.environment.set(\"newEmailAddress\", data.emailAddress);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get person should have age greater than zero\", function () {\r",
+									"\tvar jsonData = pm.response.json();\r",
+									"\tpm.expect(jsonData.age).to.gt(0);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/people/{{personId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"{{personId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/people/{{personId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people",
+										"{{personId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 19:30:19 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"2127c332-6ed5-4148-9f60-34c187467edd\",\n    \"firstName\": \"Dulce\",\n    \"lastName\": \"Sawayn\",\n    \"emailAddress\": \"Dulce.Sawayn@gmail.com\",\n    \"birthDate\": \"2010-01-01T00:00:00\",\n    \"age\": 14\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Person",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Update person should return status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Update person should have name prefix\", function(){\r",
+									"\tvar jsonData = pm.response.json();\r",
+									"\tpm.expect(jsonData.namePrefix).not.null;\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Update person should have favorite color\", function(){\r",
+									"\tvar jsonData = pm.response.json();\r",
+									"\tpm.expect(jsonData.favoriteColor).not.null;\r",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"namePrefix\": \"{{$randomNamePrefix}}\",\r\n  \"favoriteColor\": \"{{$randomColor}}\",\r\n\r\n  \"firstName\": \"{{newFirstName}}\",\r\n  \"lastName\": \"{{newLastName}}\",\r\n  \"emailAddress\": \"{{newEmailAddress}}\",\r\n  \"birthDate\": \"{{newDateOfBirth}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/people/{{personId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"{{personId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"{{newFirstName}}\",\r\n  \"lastName\": \"{{newLastName}}\",\r\n  \"emailAddress\": \"{{newFirstName}}.{{newLastName}}@outlook.com\",\r\n  \"birthDate\": \"2010-01-17\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/people/{{personId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people",
+										"{{personId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 16:25:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"8831a4c0-8230-4142-8c2d-132ec7992d6b\",\n    \"firstName\": \"Franco\",\n    \"lastName\": \"Brakus\",\n    \"emailAddress\": \"Franco.Brakus@outlook.com\",\n    \"birthDate\": \"2010-01-17T00:00:00\",\n    \"age\": 14\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Employment History",
+			"item": [
+				{
+					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get all employment history of a person should return status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"{{personId}}",
+								"employmenthistory"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people",
+										"{{personId}}",
+										"employmenthistory"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 15:17:18 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"count\": 3,\n    \"data\": [\n        {\n            \"id\": \"c8922a02-0ef3-4300-9e1d-a782d04db116\",\n            \"personId\": \"7c09fd4d-26a7-4221-837e-da0ba177b713\",\n            \"companyName\": \"Will, Hermann and Will\",\n            \"jobTitle\": \"Product Data Facilitator\",\n            \"jobType\": \"Analyst\",\n            \"phoneNumber\": \"383-775-4815\",\n            \"streetAddress\": \"631 Makayla Orchard\",\n            \"city\": \"Waldorf\",\n            \"country\": \"Brunei Darussalam\"\n        },\n        {\n            \"id\": \"619bc1bd-0ec4-4626-a097-6452907dfbdf\",\n            \"personId\": \"7c09fd4d-26a7-4221-837e-da0ba177b713\",\n            \"companyName\": \"Johns - Harris\",\n            \"jobTitle\": \"Future Marketing Orchestrator\",\n            \"jobType\": \"Facilitator\",\n            \"phoneNumber\": \"549-314-0873\",\n            \"streetAddress\": \"179 Hickle Key\",\n            \"city\": \"Ninabury\",\n            \"country\": \"Niger\"\n        },\n        {\n            \"id\": \"caddbf42-0b5c-4ff7-af45-09e9cdad7517\",\n            \"personId\": \"7c09fd4d-26a7-4221-837e-da0ba177b713\",\n            \"companyName\": \"Douglas, Morissette and Kuhlman\",\n            \"jobTitle\": \"Customer Paradigm Director\",\n            \"jobType\": \"Director\",\n            \"phoneNumber\": \"284-746-0972\",\n            \"streetAddress\": \"0332 Pacocha Mountain\",\n            \"city\": \"Mariamberg\",\n            \"country\": \"Gabon\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Add EmpHist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Add employment history should return status code 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"\r",
+									"    pm.environment.set(\"employmentHistoryId\", pm.response.json().id);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyName\": \"{{$randomCompanyName}}\",\r\n  \"jobTitle\": \"{{$randomJobTitle}}\",\r\n  \"jobType\": \"{{$randomJobType}}\",\r\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n  \"streetAddress\": \"{{$randomStreetAddress}}\",\r\n  \"city\": \"{{$randomCity}}\",\r\n  \"country\": \"{{$randomCountry}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"{{personId}}",
+								"employmenthistory"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"companyName\": \"{{$randomCompanyName}}\",\r\n  \"jobTitle\": \"{{$randomJobTitle}}\",\r\n  \"jobType\": \"{{$randomJobType}}\",\r\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n  \"streetAddress\": \"{{$randomStreetAddress}}\",\r\n  \"city\": \"{{$randomCity}}\",\r\n  \"country\": \"{{$randomCountry}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people",
+										"{{personId}}",
+										"employmenthistory"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 15:17:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Location",
+									"value": "/people/7c09fd4d-26a7-4221-837e-da0ba177b713/employmenthistory/caddbf42-0b5c-4ff7-af45-09e9cdad7517"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"caddbf42-0b5c-4ff7-af45-09e9cdad7517\",\n    \"personId\": \"7c09fd4d-26a7-4221-837e-da0ba177b713\",\n    \"companyName\": \"Douglas, Morissette and Kuhlman\",\n    \"jobTitle\": \"Customer Paradigm Director\",\n    \"jobType\": \"Director\",\n    \"phoneNumber\": \"284-746-0972\",\n    \"streetAddress\": \"0332 Pacocha Mountain\",\n    \"city\": \"Mariamberg\",\n    \"country\": \"Gabon\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get EmpHist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get person specific employment history should return status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory/{{employmentHistoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"{{personId}}",
+								"employmenthistory",
+								"{{employmentHistoryId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory/{{employmentHistoryId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people",
+										"{{personId}}",
+										"employmenthistory",
+										"{{employmentHistoryId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 15:15:01 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"ae11b950-dd95-4c8f-a67c-4ebe65c1c9e9\",\n    \"personId\": \"12d13ac2-85e6-44b0-a705-72b562c9f035\",\n    \"companyName\": \"Crona Group\",\n    \"jobTitle\": \"Dynamic Research Representative\",\n    \"jobType\": \"Liaison\",\n    \"phoneNumber\": \"261-525-1879\",\n    \"streetAddress\": \"593 Dickens Rapid\",\n    \"city\": \"Aricshire\",\n    \"country\": \"Guyana\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update EmpHist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Update employment history should return status code 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"\r",
+									"    pm.environment.set(\"employmentHistoryId\", pm.response.json().id);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyName\": \"{{$randomCompanyName}}\",\r\n  \"jobTitle\": \"{{$randomJobTitle}}\",\r\n  \"jobType\": \"{{$randomJobType}}\",\r\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n  \"streetAddress\": \"{{$randomStreetAddress}}\",\r\n  \"city\": \"{{$randomCity}}\",\r\n  \"country\": \"{{$randomCountry}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory/{{employmentHistoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"{{personId}}",
+								"employmenthistory",
+								"{{employmentHistoryId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"companyName\": \"{{$randomCompanyName}}\",\r\n  \"jobTitle\": \"{{$randomJobTitle}}\",\r\n  \"jobType\": \"{{$randomJobType}}\",\r\n  \"phoneNumber\": \"{{$randomPhoneNumber}}\",\r\n  \"streetAddress\": \"{{$randomStreetAddress}}\",\r\n  \"city\": \"{{$randomCity}}\",\r\n  \"country\": \"{{$randomCountry}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory/{{employmentHistoryId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people",
+										"{{personId}}",
+										"employmenthistory",
+										"{{employmentHistoryId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 15:15:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"ae11b950-dd95-4c8f-a67c-4ebe65c1c9e9\",\n    \"personId\": \"12d13ac2-85e6-44b0-a705-72b562c9f035\",\n    \"companyName\": \"Marvin, Kihn and Wyman\",\n    \"jobTitle\": \"Global Research Planner\",\n    \"jobType\": \"Facilitator\",\n    \"phoneNumber\": \"488-790-9950\",\n    \"streetAddress\": \"5713 Amos Views\",\n    \"city\": \"Freeport\",\n    \"country\": \"Lesotho\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete EmpHist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Delete person specific employment history should return status code 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory/{{employmentHistoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"{{personId}}",
+								"employmenthistory",
+								"{{employmentHistoryId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/people/{{personId}}/employmenthistory/{{employmentHistoryId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people",
+										"{{personId}}",
+										"employmenthistory",
+										"{{employmentHistoryId}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 15:15:10 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cleanup",
+			"item": [
+				{
+					"name": "Delete Person",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Delete person should return status code 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/people/{{personId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people",
+								"{{personId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/people/{{personId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people",
+										"{{personId}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jul 2024 16:25:15 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Delete All People",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Delete all people should return status code 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/people",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"people"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/people",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"people"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 15:17:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

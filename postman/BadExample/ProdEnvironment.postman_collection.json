@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "bc706159-3a32-4d14-afc1-09f6412e7487",
+		"name": "ProdEnvironment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32379480"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"abcbdfjsadfks\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://peopledirectory-pmsc.azurewebsites.net/login",
+					"protocol": "https",
+					"host": [
+						"peopledirectory-pmsc",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsIm5iZiI6MTcyMTk5NzExNiwiZXhwIjoxNzIyMDgzNTE2LCJpYXQiOjE3MjE5OTcxMTYsImlzcyI6Im1hc3RlcmluZy1wb3N0bWFuIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTk5OSJ9.4wY3MfjytqSCSZY_KcHlBAP2weVo0H5HnCVB1ZWj5Vc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peopledirectory-pmsc-test.azurewebsites.net/people",
+					"protocol": "https",
+					"host": [
+						"peopledirectory-pmsc-test",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Person",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsIm5iZiI6MTcyMTk5NzExNiwiZXhwIjoxNzIyMDgzNTE2LCJpYXQiOjE3MjE5OTcxMTYsImlzcyI6Im1hc3RlcmluZy1wb3N0bWFuIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTk5OSJ9.4wY3MfjytqSCSZY_KcHlBAP2weVo0H5HnCVB1ZWj5Vc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"Test\",\r\n  \"lastName\": \"Demo\",\r\n  \"emailAddress\": \"abc@example.net\",\r\n  \"birthDate\": \"2010-01-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://peopledirectory-pmsc.azurewebsites.net/people",
+					"protocol": "https",
+					"host": [
+						"peopledirectory-pmsc",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsIm5iZiI6MTcyMTk5NzExNiwiZXhwIjoxNzIyMDgzNTE2LCJpYXQiOjE3MjE5OTcxMTYsImlzcyI6Im1hc3RlcmluZy1wb3N0bWFuIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTk5OSJ9.4wY3MfjytqSCSZY_KcHlBAP2weVo0H5HnCVB1ZWj5Vc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://peopledirectory-pmsc-test.azurewebsites.net/people/e42dd9fd-e333-4104-bf81-c3b378b49ab4",
+					"protocol": "https",
+					"host": [
+						"peopledirectory-pmsc-test",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"people",
+						"e42dd9fd-e333-4104-bf81-c3b378b49ab4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Person",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsIm5iZiI6MTcyMTE0NTMzOSwiZXhwIjoxNzIxMjMxNzM5LCJpYXQiOjE3MjExNDUzMzksImlzcyI6Im1hc3RlcmluZy1wb3N0bWFuIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxNSJ9.zkYH1LFIKci9f5VvUSNve19Os-DEaliB-9EkNV2uHBA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://peopledirectory-pmsc-test.azurewebsites.net/people/e42dd9fd-e333-4104-bf81-c3b378b49ab4",
+					"protocol": "https",
+					"host": [
+						"peopledirectory-pmsc-test",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"people",
+						"e42dd9fd-e333-4104-bf81-c3b378b49ab4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
