@@ -255,15 +255,16 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let data = pm.response.json();\r",
-									"\r",
 									"pm.test(\"Add person should return status code 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
 									"\r",
+									"    let data = pm.response.json();\r",
 									"\tpm.environment.set(\"personId\", data.id);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Add person should return person information\", function(){\r",
+									"    let data = pm.response.json();\r",
+									"\r",
 									"    pm.expect(data.firstName).to.not.empty;\r",
 									"    pm.expect(data.lastName).to.not.empty;\r",
 									"    pm.expect(data.age).to.be.greaterThan(1);\r",
